@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhm.microserviceauth.mapper.SysMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yhm.microserviceauth.entity.Do.SysMenu">
+        <id column="MENU_ID" property="menuId" />
+        <result column="MENU_NAME" property="menuName" />
+        <result column="MENU_PATH" property="menuPath" />
+        <result column="COMPONENT" property="component" />
+        <result column="ISHIDDEN" property="ishidden" />
+        <result column="REDIRECT" property="redirect" />
+        <result column="ALWAYSSHOW" property="alwaysshow" />
+        <result column="TITLE" property="title" />
+        <result column="ICON" property="icon" />
+        <result column="ISNOCACHE" property="isnocache" />
+        <result column="BREADCRUMB" property="breadcrumb" />
+        <result column="FATHER" property="father" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        MENU_ID, MENU_NAME, MENU_PATH, COMPONENT, ISHIDDEN, REDIRECT, ALWAYSSHOW, TITLE, ICON, ISNOCACHE, BREADCRUMB, FATHER
+    </sql>
+
+    <select id="getMenuByUsernameAndClientId" resultMap="BaseResultMap" >
+
+        select e.MENU_ID, e.MENU_NAME, e.MENU_PATH, e.COMPONENT, e.ISHIDDEN, e.REDIRECT, e.ALWAYSSHOW, e.TITLE, e.ICON, e.ISNOCACHE, e.BREADCRUMB, e.FATHER
+          from SYS_USER a, SYS_ROLE_USER b, SYS_ROLE_MENU c, SYS_CLIENT_MENU d,SYS_MENU e, oauth_client_details f
+         where a.user_id = b.user_id
+           and b.role_id = c.role_id
+           and c.menu_id = d.menu_id
+           and d.menu_id = e.menu_id
+           and d.client_id = f.id
+           and f.client_id = #{client_id}
+           and a.user_name = #{user_name}
+
+    </select>
+
+</mapper>

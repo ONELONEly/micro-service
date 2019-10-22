@@ -1,0 +1,13 @@
+#端口
+server:
+  port: 8080
+#安全设置是否生效
+#management:
+#  security:
+#    enabled: false
+
+test: this is client_one
+endpoints:
+  refresh:
+    sensitive: false
+

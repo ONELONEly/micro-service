@@ -1,0 +1,35 @@
+#配置对程序密钥信息（必须在bootstrap文件中配置）
+#encrypt:
+#  key: dd
+
+
+
+#configServer配置
+spring:
+  application:
+    name: microServiceConfig
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://mobileapi.gree.com:3000/180260/mircoServiceConfig.git
+          ## 强制拉去 Git 内容
+          force-pull: true
+          username: 180260
+          password: 180260
+          #skipSslValidation: true                    #跳过ssl证书认证
+          #timeout：4                                 #连接超时时间(秒为单位)
+          search-paths: /{application}
+
+        #默认属性，客户端自动抓取覆盖属性，适用于通用配置
+        #overrides:
+        #  test: qweqwe
+
+        #当使用通配符配置uri（https://github.com/234419081/cloud-config/{application}-config）时，
+        #指定checkName,避免使用默认app(application)进行检查
+        #health:
+         # repositories:
+          #  check:
+          #    name: check-repo
+          #    label: master
+          #    profiles: default

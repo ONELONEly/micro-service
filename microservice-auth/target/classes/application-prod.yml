@@ -1,0 +1,19 @@
+#eureka服务注册中心配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.2.11.13:8761/eureka/,http://10.2.11.14:8761/eureka/
+
+#redis服务器配置
+spring:
+  redis:
+    host: 10.2.11.13
+    #timeout: 100m
+  # DataSource Config
+  datasource:
+    url: jdbc:oracle:thin:@//10.2.12.14:1521/GGRDAT
+    username: ora8gree
+    password: greeora8321
+    driver-class-name: oracle.jdbc.OracleDriver
+    # 最大连接数
+    maxActive: 100

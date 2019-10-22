@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: consul-client
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8502
+      discovery:
+        healthCheckPath: /hi
+        healthCheckInterval: 5s
+server:
+  port: 8081

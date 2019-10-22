@@ -1,0 +1,14 @@
+server:
+  port: 7001
+
+#eureka注册服务中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.2.11.13:8761/eureka/,http://10.2.11.14:8761/eureka/
+
+
+
+
+
+

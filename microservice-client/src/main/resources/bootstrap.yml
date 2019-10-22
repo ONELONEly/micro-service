@@ -1,0 +1,83 @@
+#eureka服务注册中心配置
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+
+#数据库加密公钥
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKtJLhqthqZ3tKFzRBqIQbOHsZxcjCWRS/6cjnxbpCnErujVGZuv1EwmYiBwN2iN01awcIwGIv0UexWC1TWBOF8CAwEAAQ==
+#配置中心服务器配置
+spring:
+  application:
+      name: microServiceClient
+  datasource:
+    druid:
+      initial-size: 8 #初始化连接大小
+      min-idle: 5 #最小空闲连接数
+      max-active: 10 #最大连接数
+      query-timeout: 6000 #查询超时时间
+      transaction-query-timeout: 6000 #事务查询超时时间
+      remove-abandoned-timeout: 1800
+      min-evictable-idle-time-millis: 300000
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: select 1 from dual
+      filter:
+        config:
+          enabled: true
+      #登录配置
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+      ora8:
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:oracle:thin:@//10.2.12.14:1521/GGRDAT
+        username: ora8gree
+        password: greeora8321
+        driver-class-name: oracle.jdbc.driver.OracleDriver
+        #connection-properties: config.decrypt=true;config.decrypt.key=${public-key}
+      ssaln:
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:oracle:thin:@//10.2.28.42:1521/infordbdg
+        username: ssaln
+        password: ZB35infor89
+        driver-class-name: oracle.jdbc.driver.OracleDriver
+        #connection-properties: config.decrypt=true;config.decrypt.key=${public-key}
+        #initialize: false
+        #continue-on-error: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.baomidou.springboot.entity
+  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: id_worker
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      db-type: h2
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+
+

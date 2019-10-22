@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhm.microserviceauth.mapper.SysRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yhm.microserviceauth.entity.Do.SysRole">
+        <id column="ROLE_ID" property="roleId" />
+        <result column="ROLE_NAME" property="roleName" />
+        <result column="CREATE_DT" property="createDt" />
+        <result column="UPDATE_DT" property="updateDt" />
+        <result column="ROLE_LEVEL" property="roleLevel" />
+        <result column="LEVEL_NUM" property="levelNum" />
+        <result column="LEVEL_CODE" property="levelCode" />
+        <result column="IS_ENABLE" property="isEnable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ROLE_ID, ROLE_NAME, CREATE_DT, UPDATE_DT, ROLE_LEVEL, LEVEL_NUM, LEVEL_CODE, IS_ENABLE
+    </sql>
+
+    <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="int">
+        select
+          <include refid="Base_Column_List"/>
+          from SYS_ROLE a
+         where a.is_enable = 1
+           and exists (select 1
+                  from SYS_ROLE_USER b
+                 where a.role_id = b.user_id
+                   and b.user_id = #{userId})
+
+    </select>
+</mapper>

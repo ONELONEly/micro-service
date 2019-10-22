@@ -1,0 +1,9 @@
+server:
+  port: 7001
+
+
+#eureka注册服务中心url配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/

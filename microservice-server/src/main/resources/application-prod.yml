@@ -1,0 +1,9 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.2.11.13:8761/eureka/,http://10.2.11.14:8761/eureka/
+  server:
+    #eureka自我保护机制
+    enable-self-preservation: false
+    #  defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+

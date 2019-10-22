@@ -1,0 +1,54 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: microServiceAuth
+  profiles:
+    active: @profileActive@
+  ##配置安全用户
+  security:
+    user:
+      name: @spring-security-user-name@
+      password: @spring-security-user-password@
+
+logging:
+  config: classpath:log/logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+    metadata-map:
+      user.name: ${spring.security.user.name}        #These two are needed so that the server
+      user.password: ${spring.security.user.password}  #can access the protected client endpoints
+
+
+yhm:
+  oauth2:
+    token:
+      store:
+        type: authJwt
+
+encrypt:
+  key-store:
+    location: classpath:greeerp.jks
+    secret: gree!23
+    password: gree!23
+    alias: greeerp
+
+mybatis-plus:
+  # 扫描 mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml

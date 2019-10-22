@@ -1,0 +1,41 @@
+package com.yhm.microserviceauth.config.oauth.configuration;
+
+import com.yhm.microserviceauth.config.oauth.service.impl.RedisAuthorizationCodeServices;
+import com.yhm.microserviceauth.config.oauth.service.impl.RedisClientDetailsService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.oauth2.provider.code.RandomValueAuthorizationCodeServices;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+/**
+ *
+ * client服务及authCode服务
+ * @author yhm
+ * @date 2018/12/12
+ *
+ */
+public class ClientDetailsConfiguration {
+    @Resource
+    private DataSource dataSource;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
+    /**
+     * 声明 ClientDetails实现
+     */
+    //@Bean
+    public RedisClientDetailsService clientDetailsService() {
+        RedisClientDetailsService clientDetailsService = new RedisClientDetailsService(dataSource);
+        clientDetailsService.setRedisTemplate(redisTemplate);
+        return clientDetailsService;
+    }
+
+    @Bean
+    public RandomValueAuthorizationCodeServices authorizationCodeServices() {
+        RedisAuthorizationCodeServices redisAuthorizationCodeServices = new RedisAuthorizationCodeServices();
+        redisAuthorizationCodeServices.setRedisTemplate(redisTemplate);
+        return redisAuthorizationCodeServices;
+    }
+}

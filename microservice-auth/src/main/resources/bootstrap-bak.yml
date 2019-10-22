@@ -1,0 +1,36 @@
+
+#eureka服务注册中心配置
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8762/eureka/,http://${eureka.instance.hostname}:8761/eureka/
+#配置中心服务器配置
+spring:
+  application:
+      name: microServiceAuth
+  cloud:
+    config:
+      profile: dev
+      label: master
+      #指定uri方式
+      #uri: http://localhost:7001
+      username: admin
+      password: admin
+      #服务方式
+      discovery:
+        enabled: true
+        service-id: microServiceConfig
+      #优先判断configServer是否正常，快速响应失败内容（在其他项加载之前）
+      fail-fast: true
+      #连接重试配置
+      retry:
+        initial-interval: 1000  #初始重试间隔
+        max-attempts: 6         #最大重试次数
+        max-interval: 2000      #最大重试间隔
+        multiplier: 1.1         #下一间隔乘数，例：1000、1100、1210
+
+

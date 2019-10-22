@@ -1,0 +1,32 @@
+##配置安全用户
+spring:
+  application:
+    name: microserviceConfig
+  security:
+    user:
+      name: @spring-security-user-name@
+      password: @spring-security-user-password@
+  profiles:
+    active: @profileActive@
+
+logging:
+  config: classpath:log/logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+    health-check-url-path: /actuator/health
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+    metadata-map:
+      user.name: ${spring.security.user.name}        #These two are needed so that the server
+      user.password: ${spring.security.user.password}  #can access the protected client endpoints

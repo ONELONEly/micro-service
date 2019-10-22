@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhm.microserviceauth.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yhm.microserviceauth.entity.Do.SysUser">
+        <id column="USER_ID" property="userId" />
+        <result column="USER_NAME" property="userName" />
+        <result column="CHINESE_NAME" property="chineseName" />
+        <result column="PASSWORD" property="password" />
+        <result column="LOGIN_IP" property="loginIp" />
+        <result column="DEP_ID" property="depId" />
+        <result column="DEP_NAME" property="depName" />
+        <result column="IS_ENABLE" property="isEnable" />
+        <result column="ACCOUNT_NON_EXPIRED" property="accountNonExpired" />
+        <result column="ACCOUNT_NON_LOCKED" property="accountNonLocked" />
+        <result column="CREDENTIALS_NON_EXPIRED" property="credentialsNonExpired" />
+        <result column="MAIL" property="mail" />
+        <result column="AVATAR" property="avatar" />
+        <result column="INTRODUCTION" property="introduction" />
+        <result column="CREATE_DT" property="createDt" />
+        <result column="LAST_LOGIN_DT" property="lastLoginDt" />
+        <result column="DEADLINE_DT" property="deadlineDt" />
+        <result column="UPDATE_DT" property="updateDt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        USER_ID, USER_NAME, CHINESE_NAME, PASSWORD, LOGIN_IP, DEP_ID, DEP_NAME, IS_ENABLE, ACCOUNT_NON_EXPIRED, ACCOUNT_NON_LOCKED, CREDENTIALS_NON_EXPIRED, MAIL, AVATAR, INTRODUCTION, CREATE_DT, LAST_LOGIN_DT, DEADLINE_DT, UPDATE_DT
+    </sql>
+
+</mapper>
