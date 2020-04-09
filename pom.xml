@@ -48,7 +48,7 @@
         <com.oracle.jdbc.version>11.2.0.3</com.oracle.jdbc.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <spring-boot-admin.version>2.0.5</spring-boot-admin.version>
-        <spring-security-oauth2.version>2.3.3.RELEASE</spring-security-oauth2.version>
+        <spring-security-oauth2.version>2.3.6.RELEASE</spring-security-oauth2.version>
 
         <spring-security-user-name>admin</spring-security-user-name>
         <spring-security-user-password>admin!23</spring-security-user-password>
